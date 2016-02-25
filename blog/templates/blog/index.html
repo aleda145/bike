@@ -2,12 +2,12 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}" />
 
-{% if latest_question_list %}
+{% if latest_posts_list %}
     <ul>
-    {% for question in latest_question_list %}
-<li><a href="{% url 'blog:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for BlogPost in latest_posts_list %}
+<li><a href="{% url 'blog:detail' BlogPost.id %}">{{ BlogPost.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No blog posts.</p>
 {% endif %}
