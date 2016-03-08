@@ -1,14 +1,19 @@
-{% load staticfiles %}
+{% extends "blog/base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}" />
+
+{% block content %}
 
 {% if latest_posts_list %}
-    <ul>
+        <div class="container">
+
     {% for BlogPost in latest_posts_list %}
-<li><a href="{% url 'blog:detail' BlogPost.slug %}">{{ BlogPost.title }}</a></li>
-        <p>blog post {{ BlogPost.body|safe }}</p>
+<h1><a href="{% url 'blog:detail' BlogPost.slug %}">{{ BlogPost.title }}</a></h1>
+        <p>{{ BlogPost.body|safe }}</p>
     {% endfor %}
-    </ul>
+
+        </div>
+
 {% else %}
     <p>No blog posts.</p>
 {% endif %}
+    {% endblock %}
