@@ -5,19 +5,37 @@ from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
 
 from .models import BlogPost
 
 class IndexView(generic.ListView):
     template_name = 'blog/index.html'
     context_object_name = 'latest_posts_list'
-
+    paginate_by = 5
     def get_queryset(self):
         """
         Return the last five published Posts (not including those set to be
         published in the future).
         """
         return BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+#
+# def listing(request):
+#     contact_list = BlogPost.objects.all()
+#     paginator = Paginator(contact_list, 5) # Show 25 contacts per page
+#
+#     page = request.GET.get('page')
+#     try:
+#         contacts = paginator.page(page)
+#     except PageNotAnInteger:
+#         # If page is not an integer, deliver first page.
+#         contacts = paginator.page(1)
+#     except EmptyPage:
+#         # If page is out of range (e.g. 9999), deliver last page of results.
+#         contacts = paginator.page(paginator.num_pages)
+#
+#     return render(request, 'blog/list.html', {'contacts': contacts})
 
 
 class DetailView(generic.DetailView):
