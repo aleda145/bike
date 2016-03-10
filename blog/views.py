@@ -9,19 +9,30 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 from .models import BlogPost
+from django.views.generic.dates import MonthArchiveView
 
+#TODO archive
 class IndexView(generic.ListView):
     template_name = 'blog/index.html'
     context_object_name = 'latest_posts_list'
     paginate_by = 5
+
+
     def get_queryset(self):
         """
         Return the last five published Posts (not including those set to be
         published in the future).
         """
+
         return BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 
 
+
+
+class ArticleMonthArchiveView(MonthArchiveView):
+    queryset = BlogPost.objects.all()
+    date_field = "pub_date"
+    allow_future = True
 
 class DetailView(generic.DetailView):
     template_name = 'blog/detail.html'
