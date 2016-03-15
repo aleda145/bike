@@ -1,3 +1,5 @@
+{% extends "blog/base.html" %}
+{% block content %}
 <ul>
     {% for article in object_list %}
         <li>{{ article.pub_date|date:"F j, Y" }}: {{ article.title }}</li>
@@ -12,3 +14,4 @@
         Next Month: {{ next_month|date:"F Y" }}
     {% endif %}
 </p>
+{% endblock %}

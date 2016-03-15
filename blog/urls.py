@@ -7,22 +7,20 @@ from blog.models import BlogPost
 app_name= 'blog'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^(?P<year>[0-9]{4})/(?P<month>[-\w]+)/$',
-        ArticleMonthArchiveView.as_view(),
-        name="archive_month"),
-    # Example: /2012/08/
+
+    #for some reason you _have_ to have the numeric first, otherwise it wont work
+     # Example: /2012/08/
     url(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]+)/$',
         ArticleMonthArchiveView.as_view(month_format='%m'),
         name="archive_month_numeric"),
+    #example 2012/mar
+    url(r'^(?P<year>[0-9]{4})/(?P<month>[-\w]+)/$',
+        ArticleMonthArchiveView.as_view(),
+        name="archive_month"),
 
 
-    # url(r'^articles/monthly/$',MonthArchiveView.as_view(
-    #     model=BlogPost,
-    #     paginate_by=12,
-    #     date_field='pub_date',
-    #     template_name='blog/monthly.html',
-    # ),name="monthly"),
-    url(r'^(?P<slug>.+)/$', views.DetailView.as_view(), name='detail'),
+ url(r'^reverse/$', views.ReversePostView.as_view(), name='index'),
+        url(r'^(?P<slug>.+)/$', views.BlogPostDetail.as_view(), name='detail'),
 
     # Example: /2012/aug/
 

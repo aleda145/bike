@@ -2,48 +2,46 @@
 
 
 {% block content %}
-<ul>
-    {% for article in object_list %}
-        <li>{{ article.pub_date|date:"F j, Y" }}: <a href="{% url 'blog:detail' article.slug %}">{{ article.title }}</a></li>
-    {% endfor %}
-</ul>
+    <div class="col-md-10">
+        <div class="container main-content">
 
-<p>
-    {% if previous_month %}
-        Previous Month: {{ previous_month|date:"F Y" }}
-    {% endif %}
-    {% if next_month %}
-        Next Month: {{ next_month|date:"F Y" }}
-    {% endif %}
-</p>
-    {% if latest_posts_list %}
+            {% if posts_list %}
 
 
-        <div class="container">
+                {% for BlogPost in posts_list %}
+                    <h1><a href="{% url 'blog:detail' BlogPost.slug %}">{{ BlogPost.title }}</a></h1>
+                    <p>{{ BlogPost.body|safe }}</p>
+                {% endfor %}
 
-            {% for BlogPost in latest_posts_list %}
-                <h1><a href="{% url 'blog:detail' BlogPost.slug %}">{{ BlogPost.title }}</a></h1>
-                <p>{{ BlogPost.body|safe }}</p>
-            {% endfor %}
-            {% if is_paginated %}
-                <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="/blog?page={{ page_obj.previous_page_number }}">previous</a>
+                {% if is_paginated %}
+                    <div class="pagination">
+                            <span class="page-links">
+                                {% if page_obj.has_previous %}
+                                    <a href="/blog?page={{ page_obj.previous_page_number }}">previous</a>
+                                {% endif %}
+                                <span class="page-current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+                                {% if page_obj.has_next %}
+                                    <a href="/blog?page={{ page_obj.next_page_number }}">next</a>
+                                {% endif %}
+                            </span>
+                    </div>
                 {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="/blog?page={{ page_obj.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-                </div>
+
+
+            {% else %}
+                <p>No blog posts.</p>
             {% endif %}
 
         </div>
+    </div>
+    <div class="right-sidebar col-md-2">
+        <h3>new here? Read from the beginning --> </h3>
+        <h2>Archive</h2>
 
-    {% else %}
-        <p>No blog posts.</p>
-    {% endif %}
+    </div>
+
 {% endblock %}
+
+
