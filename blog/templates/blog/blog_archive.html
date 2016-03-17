@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    {% regroup posts_list by pub_date|date:"Y" as year_list %}
+    {% for year in year_list %}
+        {% regroup year.list by pub_date|date:"F" as month_list %}
+
+        {% for month in month_list %}
+            <a href="../{{ year.grouper }}/{{ month.grouper|slice:":3" }}"><h3>{{ year.grouper }} {{ month.grouper|slice:":3" }}  </h3></a>
+            {%  for blog in month.list %}
+                <a href="../{{ blog.slug }}">{{ blog.title }}</a>
+
+                {% endfor %}
+            <br>
+
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

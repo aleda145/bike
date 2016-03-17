@@ -8,21 +8,23 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from .models import BlogPost
 from django.views.generic.dates import MonthArchiveView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from .models import BlogPost
 
 #TODO archive
 class IndexView(ListView):
     context_object_name = 'posts_list'
-    template_name = 'blog/index.html'
+    template_name = 'blog/blog_main.html'
     paginate_by = 5
+
+
+    ####queryset is returned to the template, but first it is cut in pages of 5 by pagination.
     queryset = BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     print(queryset)
-
 # class IndexView(generic.ListView):
-#     template_name = 'blog/index.html'
+#     template_name = 'blog/blog_base.html'
 #     context_object_name = 'posts_list'
 #     paginate_by = 5
 #     def get_queryset(self):
@@ -35,8 +37,8 @@ class IndexView(ListView):
 #         context=BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 #         return context
 
-class ReversePostView(IndexView):
-    template_name='blog/index.html'
+class BlogArchiveView(IndexView):
+    template_name= 'blog/blog_archive.html'
     paginate_by = 0
     def get_queryset(self):
         """
@@ -44,7 +46,7 @@ class ReversePostView(IndexView):
         published in the future).
         """
 
-        return BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')
+        return BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 
 
 
@@ -54,10 +56,21 @@ class ArticleMonthArchiveView(MonthArchiveView, IndexView):
     allow_future = True
     paginate_by = 0
 
+class ReversePostView(IndexView):
+    template_name = 'blog/blog_archive.html'
+    paginate_by = 0
 
 class BlogPostDetail(DetailView):
-    template_name = 'blog/index.html'
+    template_name = 'blog/detail.html'
+
+    context_object_name = 'posts_list'
+
     queryset = BlogPost.objects.filter(pub_date__lte=timezone.now())
+    #model = BlogPost
+    #paginate_by=0
+   # print('wow')
+   # print(queryset)
+
 
 # class DetailView(generic.DetailView):
 #     template_name = 'blog/detail.html'

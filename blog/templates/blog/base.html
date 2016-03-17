@@ -30,7 +30,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Blog</a></li>
+                    <li class="{% if request.resolver_match.url_name == "blog_main" %}active{% endif %}"><a href="{% url "blog_main" %}">Blog</a></li>
+                    <li><a href="/blog/archive">Blog Archive</a></li>
+
                     <li><a href="/about">About me</a></li>
                     <li><a href="/equipment">Equipment</a></li>
                     <li><a href="/route">Route</a></li>
@@ -54,8 +56,12 @@
         </div><!--/.container-fluid -->
     </nav>
 </div>
-
+<div class="container main-content">
     {% block content %}{% endblock %}
+</div>
+{% block sidebar %}
+
+{% endblock %}
 
 
 
