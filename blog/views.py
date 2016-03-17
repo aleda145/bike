@@ -7,6 +7,7 @@ from django.views import generic
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 from django.views.generic.dates import MonthArchiveView
 from django.views.generic.list import ListView
@@ -37,31 +38,32 @@ class IndexView(ListView):
 #         context=BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 #         return context
 
-class BlogArchiveView(IndexView):
-    template_name= 'blog/blog_archive.html'
-    paginate_by = 0
-    def get_queryset(self):
-        """
-        Return the last five published Posts (not including those set to be
-        published in the future).
-        """
 
-        return BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+#returns the blog posts in the opposite order, so starting with the first post added to the database
+class ReversePostView(IndexView):
+    template_name= 'blog/blog_base.html'
+
+    paginate_by = 5
+    def get_queryset(self):
+
+
+        return BlogPost.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')
 
 
 
 class ArticleMonthArchiveView(MonthArchiveView, IndexView):
+    template_name = 'blog/blog_base.html'
     queryset = BlogPost.objects.all()
     date_field = "pub_date"
     allow_future = True
     paginate_by = 0
 
-class ReversePostView(IndexView):
+class BlogArchiveView(IndexView):
     template_name = 'blog/blog_archive.html'
     paginate_by = 0
 
-class BlogPostDetail(DetailView):
-    template_name = 'blog/detail.html'
+class BlogPostDetailView(DetailView):
+    template_name = 'blog/blog_detail.html'
 
     context_object_name = 'posts_list'
 
@@ -71,9 +73,18 @@ class BlogPostDetail(DetailView):
    # print('wow')
    # print(queryset)
 
+class AboutView(TemplateView):
+    template_name = 'blog/about.html'
+
+class EquipmentView(TemplateView):
+    template_name = 'blog/equipment.html'
+
+class RouteView(TemplateView):
+    template_name = 'blog/route.html'
+
 
 # class DetailView(generic.DetailView):
-#     template_name = 'blog/detail.html'
+#     template_name = 'blog/blog_detail.html'
 #
 #     def get_queryset(self):
 #         """
@@ -92,7 +103,7 @@ class BlogPostDetail(DetailView):
         #         selected_choice = question.choice_set.get(pk=request.POST['choice'])
         #     except (KeyError, Choice.DoesNotExist):
         #         # Redisplay the question voting form.
-        #         return render(request, 'blog/detail.html', {
+        #         return render(request, 'blog/blog_detail.html', {
         #             'question': question,
         #             'error_message': "You didn't select a choice.",
         #         })

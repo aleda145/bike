@@ -21,6 +21,9 @@ urlpatterns = [
     url(r'^blog/', include ('blog.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.IndexView.as_view(), name='blog_main'),
+    url(r'^about/',views.AboutView.as_view(), name='about'),
+    url(r'^equipment/',views.EquipmentView.as_view(), name='equipment'),
+    url(r'^route/',views.RouteView.as_view(), name='route'),
 
 ]
 

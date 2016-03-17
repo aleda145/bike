@@ -7,6 +7,7 @@ from blog.models import BlogPost
 app_name= 'blog'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='blog_main'),
+    url(r'^reverse/$', views.ReversePostView.as_view(), name='reverse'),
 
     #for some reason you _have_ to have the numeric first, otherwise it wont work
     # Example: /2012/08/
@@ -19,10 +20,9 @@ urlpatterns = [
         name="archive_month"),
 
 
-    url(r'^reverse/$', views.ReversePostView.as_view(), name='reverse'),
-        url(r'^archive/$', views.BlogArchiveView.as_view(), name='archive'),
+    url(r'^archive/$', views.BlogArchiveView.as_view(), name='archive'),
 
-    url(r'^(?P<slug>.+)/$', views.BlogPostDetail.as_view(), name='detail'),
+    url(r'^(?P<slug>.+)/$', views.BlogPostDetailView.as_view(), name='detail'),
 
     # Example: /2012/aug/
 

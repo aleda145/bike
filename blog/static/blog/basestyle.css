@@ -8,6 +8,13 @@ body {
 }
 
 li a {
-    color: green;
 }
 
+.separator {
+    display: block;
+    border-top: 1px solid #e7e6e6;
+    border-bottom: 1px solid #e7e6e6;
+    width: 100%;
+    position: relative;
+    height: 6px;
+}
