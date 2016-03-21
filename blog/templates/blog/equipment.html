@@ -10,227 +10,34 @@
     Also I should mention again that I'm not sponsored in any way.
     <div class="separator"></div>
 
-    <h2>Clothes</h2>
-    <p>Literally can't live without them</p>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Icebreaker M's Departure LS Shirt Monsoon Plaid (M19)</td>
-            <td> Plaid shirt in Merino wool for a little bit of style when I'm off the bike.</td>
-            <td>$73</td>
-        </tr>
-        <tr>
-            <td>Icebreaker M's Tech T Lite SS Cadet </td>
-            <td>Normal Merino wool T-shirt</td>
-            <td>$45</td>
-        </tr>
-        <tr>
-            <td>Icebreaker M's Tech Lite SS Valley Viridian</td>
-            <td>Another Merino wool T-shirt, this one got a cool mountain ridge on it!</td>
-            <td>$57</td>
-        </tr>
-        <tr>
-            <td>Haglöfs Actives Merino II M's Long John Hurricane Blue</td>
-            <td>Merino Long Johns, very warm and comfy</td>
-            <td>$85</td>
-        </tr>
-        <tr>
-            <td>Merino Sf Boxer Men from Ullmax</td>
-            <td>One pair of Merino wool underwear, don't worry, I'll buy more!</td>
-            <td>$25</td>
-        </tr>
-        <tr>
-            <td>dhb Minima S Waterproof Jacket Medium Hi Vis Yellow</td>
-            <td>Waterproof jacket when it's cold and raining. Also high visibility</td>
-            <td>$30</td>
-        </tr>
-        <tr>
-            <td>Merino Zip Neck Base Layer </td>
-            <td>Base layer in Merino Wool, also has a zipper for when I want to expose some chest hair</td>
-            <td>$58</td>
-        </tr>
-        <tr>
-            <td>2x Professional ASV Merino Thermal Cycle Socks </td>
-            <td>Merino cycle socks. So I don't get cold feet</td>
-            <td>$33</td>
-        </tr>
-        <tr>
-            <td>Grip Grab Skull Cap Windster</td>
-            <td>Cap that fits snuggly under my helmet</td>
-            <td>$27</td>
-        </tr>
-        <tr>
-            <td> Grip Grab Windster</td>
-            <td>Water proof gloves for when it's around zero and raining/snowing</td>
-            <td>$30</td>
-        </tr>
-        <tr>
-            <td> </td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td> </td>
-            <td></td>
-            <td class="col-md-1"><b>Total: $463</b></td>
-        </tr>
-        </tbody>
-    </table>
 
-    <h2>Bike accessories</h2>
-    <p>To pimp my bike.</p>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Lezyne Micro Drive 400XL</td>
-            <td>Bike light, charges via USB from my battery pack, hope to use it as little as possible</td>
-            <td>$55</td>
-        </tr>
-        <tr>
-            <td>VDO M5 WL</td>
-            <td>Wireless bike computer, don't really need this but as an excel-enthusiast I like statistics</td>
-            <td>$53</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td class="col-md-1"><b>Total: $108</b></td>
-        </tr>
+    {% if equipment_list %}
+        {% for category, items in equipment_list.items %}
+            <h1>{{ category.title }}</h1>
+            <p>{{ category.description }}</p>
+            <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
 
-        </tbody>
-    </table>
-    <h2>Electronics</h2>
-    <p>Beep boop I'm a robot.</p>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Anker 22400 mAh battery pack</td>
-            <td>I love this little thing, has saved me from a dead phone so many times</td>
-            <td>$43</td>
-        </tr>
-        <tr>
-            <td>Toshiba chromebook 2 </td>
-            <td>Dual booting Linux and ChromeOS. Wrote my bachelor thesis on the litte guy, love it.</td>
-            <td>$350</td>
-        </tr>
-        <tr>
-            <td>One plus 2 phone</td>
-            <td>Will take most of my pictures using this phone</td>
-            <td>$500</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td class="col-md-1"><b>Total: $893</b></td>
-        </tr>
+                    <td class="col-md-5">{{ item.product_name }}</td>
+                    <td class="col-md-6">{{ item.description }}</td>
+                    <td class="price col-md-1">${{ item.price }}</td>
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
+            </tbody>
+            </table>
+        {% endfor %}
+    {% endif %}
 
-    <h2>Vaccines</h2>
-    <p>I like needles. (prices will differ if you aren't part of a socialized medicine scheme)</p>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Yellow fever </td>
-            <td>Requirement for south America</td>
-            <td>$48</td>
-        </tr>
-        <tr>
-            <td>Japanese encephalitis</td>
-            <td>If I end up in Laos (who knows right?).</td>
-            <td>$244</td>
-        </tr>
-        <tr>
-            <td>Meningococcal vaccine</td>
-            <td></td>
-            <td>$73</td>
-        </tr>
-        <tr>
-            <td>Rabies</td>
-            <td>If I get bit by a rabid Trump supporter</td>
-            <td>$245</td>
-        </tr>
-        <tr>
-            <td>Tuberculosis</td>
-            <td></td>
-            <td>$26</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td class="col-md-1"><b>Total: $636</b></td>
-        </tr>
 
-        </tbody>
-    </table>
 
 {% endblock %}

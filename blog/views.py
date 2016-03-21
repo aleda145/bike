@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 from django.views.generic.dates import MonthArchiveView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import BlogPost
+from .models import BlogPost,EquipmentItem,EquipmentCategory
 
 #TODO archive
 class IndexView(ListView):
@@ -41,7 +41,7 @@ class IndexView(ListView):
 
 #returns the blog posts in the opposite order, so starting with the first post added to the database
 class ReversePostView(IndexView):
-    template_name= 'blog/blog_base.html'
+    template_name= 'blog/blog_reverse.html'
 
     paginate_by = 5
     def get_queryset(self):
@@ -76,9 +76,28 @@ class BlogPostDetailView(DetailView):
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
 
-class EquipmentView(TemplateView):
+class EquipmentView(ListView):
     template_name = 'blog/equipment.html'
-
+    context_object_name = 'equipment_list'
+    print('eq cat')
+    print(EquipmentCategory.objects.all())
+    print('eq items')
+    print(EquipmentItem.objects.all())
+    print(EquipmentCategory.objects.get(id=1).equipmentitem_set.all())
+    #print(EquipmentCategory.equipmentitem_set.all())
+    #for equipmentitem in EquipmentCategory.equipmentitem_set.all():
+        #print(equipmentitem)
+    print('for lop')
+    data={}
+    for item in EquipmentCategory.objects.all():
+        data[item]=item.equipmentitem_set.all()
+        print('item')
+        print(item)
+        print('items')
+        print(item.equipmentitem_set.all())
+    print('data')
+    print(data)
+    queryset = data
 class RouteView(TemplateView):
     template_name = 'blog/route.html'
 

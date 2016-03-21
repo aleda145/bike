@@ -18,3 +18,7 @@ li a {
     position: relative;
     height: 6px;
 }
+
+.main-content{
+    margin-right: 0;
+}

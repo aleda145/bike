@@ -22,3 +22,18 @@ class BlogPost(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 
+class EquipmentCategory (models.Model):
+    title= models.CharField(max_length=200)
+    description=models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.title
+
+
+class EquipmentItem (models.Model):
+    title=models.ForeignKey(EquipmentCategory, on_delete=models.CASCADE)
+    product_name=models.TextField()
+    description=models.TextField()
+    price=models.IntegerField()
+    def __str__(self):
+        return (self.product_name)
