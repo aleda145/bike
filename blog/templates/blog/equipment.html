@@ -1,5 +1,8 @@
 {% extends "blog/base.html" %}
 {% block equipment %} active {% endblock %}
+    {% load staticfiles %}
+
+{% block scripts %} <script src="{% static 'blog/js/equipment.js' %}"></script> {% endblock %}
 {% block content %}
     <p>Sadly I can't do a bicycle tour without a bike or equipment to go with it. What follows is a list of things I'm bringing for this trip.</p>
     <p>As I had some trouble actually finding out what things cost, for some reason nobody wants to put this number online,
@@ -15,29 +18,33 @@
         {% for category, items in equipment_list.items %}
             <h1>{{ category.title }}</h1>
             <p>{{ category.description }}</p>
-            <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Item</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in items %}
+            <table class="table table-striped table-responsive">
+                <thead>
                 <tr>
-
-                    <td class="col-md-5">{{ item.product_name }}</td>
-                    <td class="col-md-6">{{ item.description }}</td>
-                    <td class="price col-md-1">${{ item.price }}</td>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
                 </tr>
-            {% endfor %}
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
 
-            </tbody>
+                        <td class="col-md-5">{{ item.product_name }}</td>
+                        <td class="col-md-6">{{ item.description }}</td>
+                        <td class="price col-md-1">${{ item.price }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="col-md-1"><b>Total: $</b><span class="totalprice {{ category }}">{{ category.total }}</span></td>
+                </tr>
+                </tbody>
             </table>
         {% endfor %}
     {% endif %}
 
 
-
+So overall I've spent <span id="totaltotalprice"></span> cash money on equipment. If you factor out the computer and phone (which most people I assume have) the total is <span id="totaltotalprice_nocomputer"></span>
 {% endblock %}

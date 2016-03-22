@@ -79,23 +79,24 @@ class AboutView(TemplateView):
 class EquipmentView(ListView):
     template_name = 'blog/equipment.html'
     context_object_name = 'equipment_list'
-    print('eq cat')
-    print(EquipmentCategory.objects.all())
-    print('eq items')
-    print(EquipmentItem.objects.all())
-    print(EquipmentCategory.objects.get(id=1).equipmentitem_set.all())
+    # print('eq cat')
+    # print(EquipmentCategory.objects.all())
+    # print('eq items')
+    # print(EquipmentItem.objects.all())
+    # print(EquipmentCategory.objects.get(id=1).equipmentitem_set.all())
     #print(EquipmentCategory.equipmentitem_set.all())
     #for equipmentitem in EquipmentCategory.equipmentitem_set.all():
         #print(equipmentitem)
-    print('for lop')
+   # print('for lop')
     data={}
     for item in EquipmentCategory.objects.all():
         data[item]=item.equipmentitem_set.all()
-        print('item')
-        print(item)
-        print('items')
-        print(item.equipmentitem_set.all())
-    print('data')
+       # print('item')
+       # print(item)
+        #print('items')
+        #print(item.equipmentitem_set.all())
+
+   # print('data')
     print(data)
     queryset = data
 class RouteView(TemplateView):
