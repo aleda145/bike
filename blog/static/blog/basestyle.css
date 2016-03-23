@@ -1,10 +1,11 @@
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-
+p{
+}
 .navbar {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 li a {
@@ -22,3 +23,10 @@ li a {
 .main-content{
     margin-right: 0;
 }
+.specialhint{
+}
+.blogposttext{
+    line-height: 1.8;
+    font-size: 120%;
+}
+

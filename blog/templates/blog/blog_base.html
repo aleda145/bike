@@ -4,13 +4,14 @@
 {% endblock %}
 
 {% block content %}
+        <div class="col-md-9 ">
 
             {% if posts_list %}
 
 
                 {% for BlogPost in posts_list %}
                     <h1><a href="{% url 'blog:detail' BlogPost.slug %}">{{ BlogPost.title }}</a></h1>
-                    <p>{{ BlogPost.body|safe }}</p>
+                    <p class="blogposttext">{{ BlogPost.body|safe }}</p>
 
                 {% endfor %}
 
@@ -38,7 +39,9 @@
 
 
 
-
+        </div>
 {% endblock %}
 {% block sidebar %}
+    <p class="blogposttext">Like my page!</p>
+    <div class="fb-page" data-href="https://www.facebook.com/alexander.biking" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/alexander.biking"><a href="https://www.facebook.com/alexander.biking">alexander.bike</a></blockquote></div></div>
 {% endblock %}

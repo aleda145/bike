@@ -13,10 +13,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <title>{% block title %}My amazing site{% endblock %}</title>
+    <div id="fb-root"></div>
 
 </head>
 
 <body>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -27,7 +35,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img style="max-width:100px; margin-top: -14px;" src="{% static 'blog/images/logo.png' %}"></a>
+                <a class="navbar-brand" href="/">
+                    <img style="max-width:100px; margin-top: -14px;" src="{% static 'blog/images/logo.png' %}">
+                </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -58,8 +68,15 @@
     </nav>
 </div>
 <div class="container main-content">
-    {% block sidebar %}{% endblock %}
+
+    
     {% block content %}{% endblock %}
+    <div class="col-md-3">
+        {% block blogreverseviewyesorno %}
+        {% endblock %}
+        {% block sidebar %}
+        {% endblock %}
+    </div>
 </div>
 
 
