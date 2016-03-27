@@ -10,7 +10,7 @@
         I want to give future tourers this information!</p>
     <p class="blogposttext">I'm also going to state the price for all the items. Prices will be in American dollars
         (even though I bought a lot of things in Sweden, where things are a great deal more expensive than the US).</p>
-    <p class="blogposttext">So don't see this as the definite cost to bike touring, but as a general rule of thumb.
+    <p class="blogposttext">Don't see this as the definite cost to bike touring, but as a general rule of thumb.
     Also I should mention again that I'm not sponsored in any way.
     </p>
     <div class="separator"></div>
@@ -19,7 +19,7 @@
     {% if equipment_list %}
         {% for category, items in equipment_list.items %}
             <h2>{{ category.title }}</h2>
-            <p>{{ category.description }}</p>
+            <p class="blogposttext">{{ category.description }}</p>
             <table class="table table-striped table-responsive">
                 <thead>
                 <tr>
@@ -47,7 +47,7 @@
         {% endfor %}
     {% endif %}
 
-<h1>Rundown</h1>
-So overall I've spent <b>$<span id="totaltotalprice"></span></b> cash money on equipment. If you factor out the computer
-    and phone (which most people I assume have) the total is <b>$<span id="totaltotalprice_nocomputer"></span></b>
+<h1>Summary</h1>
+<p class="blogposttext">Overall I've spent <b>$<span id="totaltotalprice"></span></b> cash money on equipment. If you factor out the computer
+    and phone (which most people I assume have) the total is <b>$<span id="totaltotalprice_nocomputer"></span></b></p>
 {% endblock %}

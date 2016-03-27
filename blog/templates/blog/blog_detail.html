@@ -3,7 +3,15 @@
     active
 {% endblock %}
 {% block content %}
+    <div class="col-md-9 ">
 
-<h1>{{ object.title }}</h1>
-{{ object.body |safe}}
+        <h1>{{ object.title }}</h1>
+        <p class="blogposttext">
+            {{ object.body |safe}}
+        </p>
+    </div>
 {% endblock %}
+{% block sidebar %}
+    <p class="blogposttext">Like my page!</p>
+    <div class="fb-page" data-href="https://www.facebook.com/alexander.biking" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/alexander.biking"><a href="https://www.facebook.com/alexander.biking">alexander.bike</a></blockquote></div></div>
+{% endblock%}
