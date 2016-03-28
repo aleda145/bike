@@ -1,3 +1,9 @@
-img {
-    width: 100%;
+
+
+.titledate > h1 { display:inline; }
+.titledate span {  }
+
+
+.blogpostcontent{
+    margin-bottom:75px;
 }

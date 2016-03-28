@@ -2,6 +2,9 @@
 {% block archive %}
     active
 {% endblock %}
+{% block title %}
+    Archive
+{% endblock %}
 {% block content %}
     {% regroup posts_list by pub_date|date:"Y" as year_list %}
     {% for year in year_list %}

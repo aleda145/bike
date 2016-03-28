@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load staticfiles %}
     {% block styles %}
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/basestyle.css' %}" />
 
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/basestyle.css' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="{% static 'blog/images/icon.png' %}" type="image/x-icon" />
 
-    <title>{% block title %}My amazing site{% endblock %}</title>
-    <div id="fb-root"></div>
+    <title>{% block title %}{% endblock %} - alexander.bike</title>
 
 </head>
-
 <body>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+{% block bodybegin%}
+{% endblock %}
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -69,7 +64,7 @@
 </div>
 <div class="container main-content">
 
-    
+
     {% block content %}{% endblock %}
     <div class="col-md-3">
         {% block blogreverseviewyesorno %}
