@@ -17,7 +17,7 @@
             <ul>
                 {%  for blog in month.list %}
                     <li class="">
-                        <a href="../{{ blog.slug }}">{{ blog.title }}</a>
+                        <a href="../{{ blog.slug }}"><p class="blogposttext">{{ blog.title }}</p></a>
                     </li>
 
                 {% endfor %}

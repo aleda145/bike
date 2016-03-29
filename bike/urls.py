@@ -24,7 +24,8 @@ urlpatterns = [
     url(r'^about/',views.AboutView.as_view(), name='about'),
     url(r'^equipment/',views.EquipmentView.as_view(), name='equipment'),
     url(r'^route/',views.RouteView.as_view(), name='route'),
-    url('^reverse/',views.ReversePostView.as_view(),name='reverse')
-
+    url('^reverse/',views.ReversePostView.as_view(),name='reverse'),
+    url('^contact/',views.ContactView.as_view(),name='contact'),
+    url('^thanks/',views.ThanksView.as_view(),name='contact'),
 ]
 

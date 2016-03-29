@@ -8,11 +8,16 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.views.generic import TemplateView
-
+from blog.forms import ContactForm
+from django.views.generic.edit import FormView
 from django.views.generic.dates import MonthArchiveView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import BlogPost,EquipmentItem,EquipmentCategory
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
+from django.template import Context
+from django.core.mail import send_mail, BadHeaderError
 
 #TODO archive
 class IndexView(ListView):
@@ -102,7 +107,29 @@ class EquipmentView(ListView):
 class RouteView(TemplateView):
     template_name = 'blog/route.html'
 
+class ContactView(FormView):
+    template_name = 'blog/contact.html'
+    form_class = ContactForm
+    success_url = '/thanks/'
+    def form_valid(self, form):
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            name=form.cleaned_data['name']
+            print(name)
+            try:
+                send_mail(subject+' '+name, message, from_email, ['alexander.dahl93@gmail.com'])
+                print('email sent!')
+            except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
 
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        return super(ContactView, self).form_valid(form)
+
+class ThanksView(TemplateView):
+    template_name = 'blog/thanks.html'
 # class DetailView(generic.DetailView):
 #     template_name = 'blog/blog_detail.html'
 #
