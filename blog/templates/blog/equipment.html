@@ -20,7 +20,9 @@
 
 
     {% if equipment_list %}
+        {{ equipment_list }}
         {% for category, items in equipment_list.items %}
+
             <h2>{{ category.title }}</h2>
             <p class="blogposttext">{{ category.description }}</p>
             <table class="table table-striped table-responsive">

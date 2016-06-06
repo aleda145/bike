@@ -93,6 +93,8 @@ class EquipmentView(ListView):
     #for equipmentitem in EquipmentCategory.equipmentitem_set.all():
         #print(equipmentitem)
    # print('for lop')
+    queryset=EquipmentCategory.objects.all()
+    print(queryset)
     data={}
     for item in EquipmentCategory.objects.all():
         data[item]=item.equipmentitem_set.all()
@@ -101,26 +103,30 @@ class EquipmentView(ListView):
         #print('items')
         #print(item.equipmentitem_set.all())
 
-   # print('data')
+    print('data')
     print(data)
     queryset = data
+    print(queryset)
 class RouteView(TemplateView):
     template_name = 'blog/route.html'
 
 class ContactView(FormView):
     template_name = 'blog/contact.html'
     form_class = ContactForm
+
     success_url = '/thanks/'
     def form_valid(self, form):
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
+            from_email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             name=form.cleaned_data['name']
             print(name)
             try:
-                send_mail(subject+' '+name, message, from_email, ['alexander.dahl93@gmail.com'])
+                send_mail(subject,name+'\nfrom:  '+from_email+'\n'+message, from_email, ['alexander.dahl93@gmail.com'])
                 print('email sent!')
+
+                send_mail('Thanks for your email!', 'Hi '+name+'! \nThank you for your email, I will try to get back to as soon as possible! \n\nBest regards\nAlex', 'Alex <alexander.dahl93@gmail.com>', [from_email])
             except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 

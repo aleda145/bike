@@ -42,19 +42,31 @@
             {% endfor %}
 
             {% if is_paginated %}
-                <div class="pagination blogposttext">
-                            <span class="page-links">
-                                {% if page_obj.has_previous %}
+                <div class="pagination col-md-12">
+                    <div class="col-md-2 text-left pagination-page">
+                        {% if page_obj.has_previous %}
 
-                                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                                {% endif %}
-                                <span class="page-current">
-                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                                </span>
-                                {% if page_obj.has_next %}
-                                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                                {% endif %}
+                            <span>
+                                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
                             </span>
+
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-8 text-center pagination-page">
+                                <span class="page-current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                </span>
+                    </div>
+
+                    <div class="col-md-2 text-right pagination-page">
+                        {% if page_obj.has_next %}
+                          <span>
+                              <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                          </span>
+
+                        {% endif %}
+                    </div>
                 </div>
             {% endif %}
 

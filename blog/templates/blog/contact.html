@@ -2,12 +2,10 @@
 
 {% block title %}Contact{% endblock %}
 {% block contact %}active {% endblock %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>Contact</h1>
-<form role="form" action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+
+    <h1>Contact</h1>
+    <p class="blogposttext">Send me an email! I would love to hear from you, doesn't matter what it is, I will happily discuss my last meal, general bike questions or if I am actually clinically insane. </p>
+   {% crispy form %}
 {% endblock %}
