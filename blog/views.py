@@ -105,7 +105,7 @@ class EquipmentView(ListView):
 
     print('data')
     print(data)
-    queryset = data
+    #queryset = data
     print(queryset)
 class RouteView(TemplateView):
     template_name = 'blog/route.html'

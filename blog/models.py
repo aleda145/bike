@@ -43,6 +43,7 @@ class EquipmentCategory (models.Model):
 
 
 class EquipmentItem (models.Model):
+    #category = models.ForeignKey(EquipmentCategory)
     title=models.ForeignKey(EquipmentCategory, on_delete=models.CASCADE)
     product_name=models.TextField()
     description=models.TextField()
