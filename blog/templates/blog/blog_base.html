@@ -3,7 +3,6 @@
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'blog/blogstyle.css' %}" />
-
 {% endblock %}
 {% block title %}
     Blog
@@ -11,7 +10,6 @@
 {% block home %}
     active
 {% endblock %}
-
 {% block bodybegin %}
     <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -23,60 +21,44 @@
 {% endblock %}
 {% block content %}
     <div class="col-md-9 ">
-
         {% if posts_list %}
-
-
             {% for BlogPost in posts_list %}
                 <div class="blogpostcontent">
                     <hr>
                     <div class="titledate">
                         <h1 class=""><a href="{% url 'blog:detail' BlogPost.slug %}">{{ BlogPost.title }}</a> </h1>
                         <h4 class="pull-right">{{ BlogPost.pub_date|date:"Y-m-d" }}</h4>
-
                     </div>
                     <hr>
-
                     <p class="blogposttext">{{ BlogPost.body|safe }}</p>
                 </div>
             {% endfor %}
-
             {% if is_paginated %}
                 <div class="pagination col-md-12">
                     <div class="col-md-2 text-left pagination-page">
                         {% if page_obj.has_previous %}
-
                             <span>
                                 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
                             </span>
-
                         {% endif %}
                     </div>
-
                     <div class="col-md-8 text-center pagination-page">
                                 <span class="page-current">
                                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                                 </span>
                     </div>
-
                     <div class="col-md-2 text-right pagination-page">
                         {% if page_obj.has_next %}
                           <span>
                               <a href="?page={{ page_obj.next_page_number }}">Next</a>
                           </span>
-
                         {% endif %}
                     </div>
                 </div>
             {% endif %}
-
-
         {% else %}
             <p>No blog posts.</p>
         {% endif %}
-
-
-
     </div>
 {% endblock %}
 {% block sidebar %}

@@ -30,9 +30,7 @@ class EquipmentCategory (models.Model):
 
     def _get_total(self):
         total_price=0
-        print(self.equipmentitem_set.filter())
         for item in self.equipmentitem_set.all():
-            print(item.price)
             total_price+=item.price
         return total_price
 
@@ -43,7 +41,6 @@ class EquipmentCategory (models.Model):
 
 
 class EquipmentItem (models.Model):
-    #category = models.ForeignKey(EquipmentCategory)
     title=models.ForeignKey(EquipmentCategory, on_delete=models.CASCADE)
     product_name=models.TextField()
     description=models.TextField()

@@ -27,5 +27,7 @@ urlpatterns = [
     url('^reverse/',views.ReversePostView.as_view(),name='reverse'),
     url('^contact/',views.ContactView.as_view(),name='contact'),
     url('^thanks/',views.ThanksView.as_view(),name='contact'),
+    url('^aboutsite/',views.AboutSiteView.as_view(),name='contact'),
+
 ]
 

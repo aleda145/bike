@@ -1,0 +1,84 @@
+{% extends "blog/base.html" %}
+{% block about_site %}active {% endblock %}
+{% block title %}About this Site{% endblock %}
+
+{% block content %}
+    <p class="blogposttext">I built this site myself. Check out the code
+        <a href="https://github.com/aleda145/bike">here!</a> (no Django settings, if you are interested I can send it
+        by email)</p>
+    <p class="blogposttext">I've been trying to make the website as fast and responsive as possible. </p>
+    <p class="blogposttext">It is hosted in the AWS cloud, on a nano EC2 instance (I don't expect to get much traffic)
+    </p>
+    <p class="blogposttext">The web framework I'm using is python framework called <a href="https://www.djangoproject.com/">Django</a>.
+        Django keeps it simple and I never need to reinvent the wheel. </p>
+    <img class="img-responsive center-block" src="http://res.cloudinary.com/alexander-bike/image/upload/v1465330671/newpost_hcyu1l.jpg">
+    <p class="blogposttext text-center"> <i>With Django I can easily add a new blog post without updating the server,
+        I just write my post and click save.</i></p>
+    <p class="blogposttext">Other things Django does for me is:</p>
+    <h3>Pagination</h3>
+    <p class="blogposttext"> Meaning the server only loads 5 blog posts at a time when someone
+        accesses the site. Saves a lot of bandwidth, both for me and the user visiting the site. What actually is the
+        perfect pagination limit is debatable, but I set it at at 5 since my blog posts will be pretty long and I like
+        scrolling rather than clicking to view the next post.  </p>
+
+    <h3>Blog Archive</h3>
+    <p class="blogposttext"> There's a very handy blog archive to view all of my posts with the
+        corresponding month. Instead of clicking through all the blog pages there's an easy index view.</p>
+
+    <h3>Reading the blog backwards</h3>
+    <p class="blogposttext"> One thing I hate when finding a new blog with a bunch of content is to read it backwards,
+        start from the bottom scroll down to read the post, then scroll up and read the next post. This is easily fixed
+        with Django, just load the view with the blog posts in reversed order. I just hope new readers actually find
+        the feature.</p>
+    <h3>Equipment sheet</h3>
+    <p class="blogposttext">Since I think everyone should be as transparent as possible I've added all the things I've
+        bought in preparation for the trip. The models I used for my equipment sheet is very simple. An equipment
+        category (i.e. Clothes) and items to put into that category. There's a simple for loop calculating the total
+        price in each category. </p>
+    <pre><code>
+class EquipmentCategory (models.Model):
+    title= models.CharField(max_length=200)
+    description=models.CharField(max_length=500)
+
+    # calculates the total price of all the EquipmentItems in a category
+
+    def _get_total(self):
+        total_price=0
+        for item in self.equipmentitem_set.all():
+            total_price+=item.price
+        return total_price
+
+    total = property(_get_total)
+
+    def __str__(self):
+        return self.title
+
+
+class EquipmentItem (models.Model):
+    title=models.ForeignKey(EquipmentCategory, on_delete=models.CASCADE)
+    product_name=models.TextField()
+    description=models.TextField()
+    price=models.IntegerField()
+    def __str__(self):
+        return (self.product_name)
+    </code>
+    </pre>
+
+    <p class="blogposttext">I didn't find a good way to sum the total price in each category after it has already been
+        fetched from the database, so I just used some Javascript to add them all together. I don't really like
+        Javascript, I think it usually adds too much bloat. This is the only snippet I'm using (except for Bootstrap
+        and JQuery)</p>
+    <pre>
+    <code>
+var x = document.getElementsByClassName("totalprice");
+total_price=0;
+for (i=0; i< x.length; i++){
+    total_price+=parseInt($(x[i]).text())
+}
+$("#totaltotalprice").text(total_price);
+    </code>
+    </pre>
+    <h3>Contact</h3>
+    <p class="blogposttext"> There's also a contact page. Made with <a href="https://github.com/maraujop/django-crispy-forms">crispy forms</a>. Surprisingly easy to setup! </p>
+
+{% endblock %}
